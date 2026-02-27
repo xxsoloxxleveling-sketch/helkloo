@@ -5,7 +5,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import CanvasSequence from "@/components/CanvasSequence";
 import HUDOverlay from "@/components/HUDOverlay";
 import Navbar from "@/components/Navbar";
-import IndustrialBackbone from "@/components/IndustrialBackbone";
+import ImmersivePanels from "@/components/ImmersivePanels";
 import EnergyEcosystem from "@/components/EnergyEcosystem";
 import TechnicalValidation from "@/components/TechnicalValidation";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -18,6 +18,7 @@ export default function Home() {
     target: sequenceRef,
     offset: ["start start", "end end"],
   });
+  const heroFadeOpacity = useTransform(scrollYProgress, [0.95, 1], [0, 1]);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -40,9 +41,9 @@ export default function Home() {
         <div className="sticky top-0 left-0 w-full h-screen overflow-hidden">
           <CanvasSequence scrollYProgress={scrollYProgress} isMobile={isMobile} />
           <HUDOverlay scrollYProgress={scrollYProgress} />
-          {/* Smooth visual transition to Industrial Backbone */}
+          {/* Smooth visual transition to cinematic story panels */}
           <motion.div
-            style={{ opacity: useTransform(scrollYProgress, [0.95, 1], [0, 1]) }}
+            style={{ opacity: heroFadeOpacity }}
             className="absolute inset-0 bg-[#121212] pointer-events-none z-20"
           />
         </div>
@@ -50,7 +51,7 @@ export default function Home() {
 
       {/* Post Hero Content */}
       <div className="relative z-10 w-full min-h-screen">
-        <IndustrialBackbone />
+        <ImmersivePanels />
         <EnergyEcosystem />
         <TechnicalValidation />
         <WhyChooseUs />

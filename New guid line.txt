@@ -1,0 +1,162 @@
+🚨 The Real Issue
+
+Your hero is:
+
+• Cinematic
+• Mechanical
+• Powerful
+• Visually dominant
+
+Then everything after becomes:
+
+• Corporate section
+• Standard layout
+• Website blocks
+
+That contrast is too extreme.
+
+The mistake is trying to follow a “normal website structure” after a cinematic hero.
+
+You cannot go back to brochure layout.
+
+You must stay immersive.
+
+🔥 FULL OVERHAUL APPROACH
+
+Instead of:
+
+Hero
+→ Manufacturing Section
+→ Product Grid
+→ Why Partner
+
+We change it to:
+
+Hero
+→ Immersive Story Sections (scrollytelling)
+→ THEN structured content
+
+We extend the narrative before switching to corporate layout.
+
+🎬 NEW STRUCTURE (Immersive Continuation)
+
+After hero ends, instead of a new section block:
+
+We create 3 immersive panels:
+
+PANEL 1 — Manufacturing Scale
+
+Full screen.
+Video background.
+Huge statement text centered.
+
+Text:
+
+“Engineered at Scale.”
+
+Small subline below.
+
+Minimal.
+
+No paragraph block.
+
+PANEL 2 — System Intelligence
+
+Background: subtle animated grid or inverter close-up.
+
+Text:
+
+“Intelligent Energy Systems.”
+
+Short supporting line.
+
+PANEL 3 — National Impact
+
+Background: wide solar farm aerial.
+
+Text:
+
+“Powering Pakistan’s Industrial Future.”
+
+Then after this…
+
+We transition into structured content sections.
+
+🧠 Why This Fixes Everything
+
+Because now:
+
+Hero energy continues.
+
+We don’t collapse into brochure mode.
+
+We stay cinematic for 3–4 screens.
+
+Then gradually shift into structured content.
+
+It feels intentional.
+
+Not abrupt.
+
+🎯 ANTIGRAVITY MASTER OVERHAUL PROMPT
+
+Paste this exactly:
+
+Completely redesign the post-hero experience.
+
+Remove the traditional Manufacturing Backbone section layout.
+
+Instead, create a cinematic scrollytelling continuation with three full-screen immersive panels.
+
+Panel 1:
+Full-screen section with background manufacturing video.
+Centered large statement:
+“Engineered at Scale.”
+Small supporting line below.
+Minimal design.
+No paragraphs.
+
+Panel 2:
+Full-screen section with subtle animated technical grid or inverter close-up background.
+Centered large statement:
+“Intelligent Energy Systems.”
+Short supporting line.
+
+Panel 3:
+Full-screen solar farm aerial background.
+Centered large statement:
+“Powering Pakistan’s Industrial Future.”
+Primary CTA below.
+
+Each panel:
+- Height 100vh.
+- Background media full-width.
+- Dark overlay for readability.
+- Smooth fade transitions between panels.
+- Typography bold, clean, industrial.
+- No boxed layouts.
+- No heavy paragraphs.
+
+After these three panels, transition into structured product and partner sections.
+
+Maintain cinematic mood before shifting to corporate layout.
+🎥 Media Prompts for Each Panel
+Manufacturing Panel
+Ultra cinematic solar panel manufacturing facility, robotic arms assembling modules, industrial metallic interior, dramatic controlled lighting, slow motion, designed for website background, seamless loop
+Systems Panel
+Close-up high-tech solar inverter system, internal circuitry glowing subtly, dark environment, technical precision, cinematic lighting, futuristic industrial aesthetic, 16:9
+National Impact Panel
+Large-scale solar farm in Pakistan at sunrise, industrial skyline in distance, golden atmosphere, wide cinematic aerial shot, ultra realistic, 16:9
+🔥 What This Will Do
+
+Instead of:
+
+Hero → Corporate Section → Boring
+
+You get:
+
+Hero → Extended Cinematic Story → Controlled Corporate Close
+
+It becomes an experience.
+
+Not a website.

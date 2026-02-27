@@ -25,7 +25,10 @@ const itemVariants: Variants = {
 
 export default function FinalCTA() {
     return (
-        <section className="w-full bg-[#121212] border-t border-[#2a2a2a] text-white py-32 px-8 flex flex-col items-center justify-center overflow-hidden">
+        <section
+            id="contact"
+            className="w-full bg-[#121212] border-t border-[#2a2a2a] text-white py-32 px-8 flex flex-col items-center justify-center overflow-hidden"
+        >
             <motion.div
                 variants={containerVariants}
                 initial="hidden"
@@ -37,7 +40,7 @@ export default function FinalCTA() {
                     variants={itemVariants}
                     className="font-orbitron text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight mb-12 text-[#eeeeee]"
                 >
-                    Powering Pakistan&apos;s Industrial Future.
+                    Build The Next Gigawatt With Aryan&apos;s Energy.
                 </motion.h2>
 
                 <motion.div variants={itemVariants}>
