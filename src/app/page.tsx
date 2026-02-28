@@ -11,7 +11,9 @@ import TechnicalValidation from "@/components/TechnicalValidation";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+
 import SystemEvolution from "@/components/SystemEvolution";
+
 
 export default function Home() {
   const sequenceRef = useRef<HTMLElement | null>(null);
