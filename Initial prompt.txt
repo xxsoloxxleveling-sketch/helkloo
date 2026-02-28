@@ -1,0 +1,91 @@
+Role: You are a senior frontend engineer and cinematic web experience architect.
+
+Objective:
+Build a production-ready single-page scroll-driven website for Aryan’s Energy, a Pakistani solar technology manufacturer.
+
+Core Mechanic:
+The hero section must use a scroll-driven image sequence rendered on HTML canvas.
+Frames are located in /public/frames and named frame_0001.webp to frame_TOTAL_FRAMES.webp.
+TOTAL_FRAMES = 150
+
+The scroll section must be 500vh tall.
+The canvas must be sticky and occupy 100vh during the entire sequence.
+Scroll progress (0 to 1) must map precisely to frame index (0 to TOTAL_FRAMES - 1).
+
+Technical Requirements:
+- Next.js 14 App Router with TypeScript
+- Tailwind CSS
+- Framer Motion for scroll tracking
+- Canvas rendering with devicePixelRatio scaling for Retina sharpness
+- Preload first 20 frames immediately, lazy-load remaining frames in batches
+- Use requestAnimationFrame render loop
+- Prevent scroll desync
+- No video tag usage — must use frame sequence
+
+Design Direction:
+Clean, futuristic, industrial.
+Dark background (#0b0b0b).
+Minimal interface.
+High contrast typography.
+
+Typography:
+Headings: Orbitron
+Body/UI: Rajdhani
+
+Hero Copy:
+Headline: Complete Solar Systems. Manufactured in Pakistan.
+Subheading: High-efficiency N-Type modules, intelligent inverters, and LiFePO4 storage engineered for South Asia’s toughest climates.
+Primary CTA: Request Partnership
+Secondary CTA: Download Technical Portfolio
+
+Scroll Phases:
+
+0%–30%
+Display headline and subheading.
+Minimal layout, left aligned.
+
+30%–75%
+Transformation phase.
+Overlay small HUD diagnostics that fade in/out based on scroll:
+- N-TYPE TOPCON ACTIVE
+- 22.5%+ EFFICIENCY
+- 6000+ CYCLE LFP
+- GRID-STABLE INVERSION
+- BUILT FOR 45°C+
+
+75%–100%
+Display strong statement:
+"Energy Sovereignty. Engineered Locally."
+Show CTA buttons clearly.
+
+Accessibility:
+- Canvas must be aria-hidden
+- Provide hidden text summary for screen readers
+- Provide reduced-motion fallback toggle
+
+Performance:
+- Must handle high DPI
+- Optimize image memory
+- Avoid blocking main thread
+- Smooth on modern mobile devices
+
+Page Structure:
+
+<Navbar fixed top minimal />
+<section class="500vh scroll-sequence">
+  <sticky container 100vh>
+    <CanvasSequence />
+    <HUDOverlay />
+  </sticky>
+</section>
+<PostHero content sections: About, Products, Footer />
+
+Deliverables:
+Generate full project file structure and all critical components:
+- layout.tsx
+- page.tsx
+- CanvasSequence component
+- HUDOverlay component
+- Navbar component
+- Tailwind config
+- Instructions to run locally

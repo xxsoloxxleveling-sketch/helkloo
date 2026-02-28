@@ -1,0 +1,157 @@
+✅ 1) 📌 Frames are not being loaded because of incorrect static file paths
+
+In Next.js, all static assets inside public/ must be referenced from the root / path — not from /src, not from a relative path in JS.
+
+✔ Correct:
+
+/frames/frame_0001.webp
+
+❌ Incorrect:
+
+frames/frame_0001.webp
+../public/frames/frame_0001.webp
+
+So verify exactly how your canvas component is loading images.
+
+If the code uses something like:
+
+new Image().src = `frames/frame_${i}.webp`
+
+That will fail — because Next.js serves the public folder at the root /.
+
+✅ Fix:
+
+new Image().src = `/frames/frame_${i}.webp`
+
+Always start with a forward slash.
+
+✅ 2) 📌 Next.js Image optimization / lazy loading interfering with scroll frames
+
+If you’re using <Image> from next/image for frames or other assets, it’s not suitable for frame sequences. The Next <Image> component lazy-loads by default and will NOT load images that are offscreen until they scroll into view, which breaks scroll-driven frames.
+
+So:
+
+❌ Don’t use <Image> for your frames.
+
+✅ Use plain <img> or new Image() for preloading into canvas.
+
+For example, if your render loop uses Image() objects, browsers will load them regardless of viewport visibility.
+
+✅ 3) 📌 Check if the scroll trigger is active
+
+Your scroll animation only changes frames if you are actually measuring scroll progress.
+
+If the component is inside a container that doesn’t scroll or is hidden, scroll progress stays at 0.
+
+🔍 Test in devtools:
+
+Scroll down and check the console:
+
+console.log(scrollYProgress.get())
+
+If it’s always 0, then:
+
+✔ The scroll container might not be 500vh tall
+✔ The sticky container might not fill the viewport
+✔ The scroll listener might be inside a non-scrolling container
+
+So ensure your wrapper structure is:
+
+<div className="h-[500vh]">
+  <ScrollCanvas />
+</div>
+
+If height is less than viewport, scroll won’t move far enough.
+
+✅ 4) 📌 Text is hidden because maybe it’s behind the canvas
+
+When you use a canvas for your image sequence, it sits on top of text unless you give text a higher z-index or wrap it in a separate layer.
+
+For example, you might have:
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+If your text has no z-index or a lower one, it’s drawing behind the canvas.
+
+So ensure text has:
+
+z-index: 10;
+position: relative;
+pointer-events: none; /* optional if you want scroll through canvas */
+
+This ensures text appears above your canvas.
+
+✅ 5) 📌 Check that frames really exist in deployed build
+
+You said you saw the folder locally — but if you deployed to GitHub Pages or another host, static file serving might break because Next.js doesn’t support public folder serving in static exports without extra config.
+
+To test:
+
+Open the dev tools → Network tab → type:
+
+https://yourdomain.com/frames/frame_0001.webp
+
+If you see a 404:
+
+✔ Either the frames folder isn’t in the final build
+✔ Or your asset paths didn’t include the basePath / assetPrefix
+
+If deploying to GitHub Pages, you may need in next.config.js:
+
+module.exports = {
+  basePath: "/helkloo",
+  assetPrefix: "/helkloo/",
+}
+
+Without this, static assets won’t load.
+
+🛠 Quick Checklist For Fixing Images
+
+Change your frame loader to use absolute public path:
+
+img.src = `/frames/frame_${i}.webp`
+
+Don’t use <Image /> for canvas frames — use plain img or JS Image().
+
+If deploying to GitHub Pages, add:
+
+basePath: '/helkloo',
+assetPrefix: '/helkloo/'
+
+in next.config.js.
+
+Test a frame by navigating to:
+
+https://your-deployed-url/frames/frame_0001.webp
+
+If you see it, static assets are configured correctly.
+
+🧠 Why Text Might Be Hidden
+
+If your text is hidden:
+
+✔ Check CSS z-index
+✔ Check if the canvas covers it
+✔ Ensure HUD/text is in a layer above scroll sequence
+
+Example fix:
+
+<div className="relative z-20">
+  <h1 className="text-white">Your Title</h1>
+</div>
+<canvas className="fixed top-0 left-0 z-10"></canvas>
+
+This ensures your text is above the canvas.
+
+🧪 Summary of Solutions
+
+✔ Absolute image paths
+✔ Correct static serving configuration
+✔ Bypass next/image for frame loading
+✔ Ensure scroll container height is enough
+✔ Adjust z-index of text & canvas

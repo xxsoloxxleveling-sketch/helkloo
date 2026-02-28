@@ -1,0 +1,239 @@
+🧩 PART 2 — MERGE INTO ONE MASTER FILE
+
+Create this file:
+
+/assets/system-evolution/merge.txt
+
+Inside it:
+
+file 'making-of-panel.mp4'
+file 'panel-to-inverter.mp4'
+file 'inverter-to-battery.mp4'
+file 'battery-to-system.mp4'
+
+Now run in terminal:
+
+cd assets/system-evolution/raw
+
+ffmpeg -f concat -safe 0 -i ../merge.txt -c copy system-evolution-master.mp4
+
+Now you have:
+
+/assets/system-evolution/raw/system-evolution-master.mp4
+
+This is your cinematic master.
+
+🧩 PART 3 — CREATE FRAME OUTPUT FOLDER
+
+Now we move to your Next.js public directory.
+
+Create:
+
+/public/frames/system-evolution/
+
+This is important.
+
+Anything inside /public becomes accessible via URL:
+
+/frames/system-evolution/frame_0001.webp
+🧩 PART 4 — EXTRACT FRAMES
+
+Now extract frames from master video.
+
+Inside /assets/system-evolution/raw/ run:
+
+ffmpeg -i system-evolution-master.mp4 -vf "fps=30,scale=1920:-1" frame_%04d.png
+
+This does:
+
+• fps=30 → 30 frames per second
+• scale=1920:-1 → keep aspect ratio, width 1920
+• frame_%04d → names like frame_0001.png
+
+If video = 20 seconds
+20 × 30 = 600 frames
+
+You’ll now see:
+
+frame_0001.png
+frame_0002.png
+...
+frame_0600.png
+🧩 PART 5 — CONVERT TO WEBP (Critical for performance)
+
+PNG is too heavy.
+
+Run:
+
+for f in frame_*.png; do
+  name=$(basename "$f" .png)
+  cwebp -q 80 "$f" -o "${name}.webp"
+done
+
+Now you get:
+
+frame_0001.webp
+frame_0002.webp
+...
+
+Delete PNG files after.
+
+🧩 PART 6 — MOVE FRAMES TO PUBLIC
+
+Move all .webp files to:
+
+/public/frames/system-evolution/
+
+Final structure should look like:
+
+/public
+  /frames
+    /hero
+      frame_0001.webp
+    /system-evolution
+      frame_0001.webp
+      frame_0002.webp
+      ...
+      frame_0600.webp
+
+Now browser can access:
+
+https://yourdomain.com/frames/system-evolution/frame_0001.webp
+
+Test that directly in browser.
+
+If it loads → correct.
+
+🧩 PART 7 — IMPLEMENT SCROLL SECTION
+
+Now we instruct Antigravity to use these frames.
+
+Paste this:
+
+Create a new scroll-driven section called "System Evolution".
+
+Height: 700vh.
+Sticky container: 100vh.
+Use canvas-based frame rendering.
+
+Frames located at:
+public/frames/system-evolution/frame_0001.webp
+through frame_0600.webp
+
+Total frames: 600.
+
+Map scroll progress (0–1) to frame index (0–599).
+Use cubic ease-in-out mapping.
+
+Preload first 25 frames.
+Lazy load remaining frames in batches.
+Use devicePixelRatio scaling.
+Redraw canvas only when frame index changes.
+🧩 PART 8 — HOW SCROLL MAPPING WORKS (Conceptually)
+
+Think of scroll like this:
+
+Scroll top → progress = 0
+Scroll bottom → progress = 1
+
+Frame index =
+
+Math.floor(progress * (totalFrames - 1))
+
+So if:
+
+progress = 0.5
+frameIndex = 0.5 × 599 = ~300
+
+That’s middle of sequence.
+
+This is how your hero works too.
+
+🧩 PART 9 — PHASE BREAKDOWN
+
+If totalFrames = 600:
+
+Manufacturing → 0–150
+Solar Panel → 150–300
+Inverter → 300–450
+Battery → 450–540
+Full System → 540–600
+
+This creates storytelling pacing.
+
+🧩 PART 10 — TEXT OVERLAY PHASE LOGIC
+
+Tell Antigravity:
+
+Overlay text changes at specific scroll ranges:
+
+0–20%:
+Precision Manufacturing.
+
+20–40%:
+N-Type TOPCon Modules.
+
+40–65%:
+Intelligent Power Conversion.
+
+65–85%:
+Advanced LiFePO4 Storage.
+
+85–100%:
+Complete Industrial Energy Systems.
+
+Text fades in/out at phase boundaries.
+
+🧩 PART 11 — PERFORMANCE OPTIMIZATION
+
+Tell Antigravity:
+
+- Only load images once.
+- Use createImageBitmap for decoding.
+- Store images in memory.
+- Avoid re-rendering if frame index hasn't changed.
+- Use requestAnimationFrame.
+- Use passive scroll listeners.
+
+This keeps it smooth.
+
+🧩 PART 12 — MOBILE VERSION (Optional but recommended)
+
+Create:
+
+/public/frames-sm/system-evolution/
+
+Extract at 1280 width:
+
+ffmpeg -i system-evolution-master.mp4 -vf "fps=30,scale=1280:-1" frame_%04d.webp
+
+Switch to this folder if screen width < 768px.
+
+🧠 IMPORTANT VISUAL RULE
+
+This section must:
+
+• Have no borders
+• No grid background
+• No boxed layout
+• No divider lines
+
+Just cinematic continuation.
+
+🚀 FINAL CHECKLIST
+
+Before deploying:
+
+Open:
+
+/frames/system-evolution/frame_0001.webp
+
+in browser.
+
+If it loads → good.
+
+Scroll section height feels long enough?
+Frames are smooth?
+No flicker?
+
+Then deploy.

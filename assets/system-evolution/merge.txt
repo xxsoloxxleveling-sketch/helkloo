@@ -1,0 +1,4 @@
+file 'making-of-panel.mp4'
+file 'panel-to-inverter.mp4'
+file 'inverter-to-battery.mp4'
+file 'battery-to-system.mp4'
